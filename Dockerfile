@@ -25,5 +25,6 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     rpm-ostree install libu2f-host && \
     rpm-ostree install gh && \
     rpm-ostree install swappy && \
+    rpm-ostree install wfwefewgewwggwe && \
     rpm-ostree cleanup -m && \
     ostree container commit
