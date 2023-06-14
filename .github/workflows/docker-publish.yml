@@ -33,7 +33,7 @@ jobs:
         run: |
           # Replace with your push commands
           docker build -t lukejcollins/silver-sway-build:latest .
-          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.MY_SECRET_TOKEN }}
           docker tag your-image-name ghcr.io/${{ github.repository_owner }}/lukejcollins/silver-sway-build:latest
           docker push ghcr.io/${{ github.repository_owner }}/lukejcollins/silver-sway-build:latest
 
