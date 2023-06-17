@@ -4,6 +4,9 @@ COPY nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/
 
 RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
+    rpm-ostree override remove foot && \
+    rpm-ostree override remove firefox firefox-langpacks && \
+    rpm-ostree override remove kanshi && \
     rpm-ostree install docker && \
     rpm-ostree install vim && \
     rpm-ostree install zsh && \
