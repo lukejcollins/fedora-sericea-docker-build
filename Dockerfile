@@ -1,9 +1,16 @@
 FROM quay.io/fedora/fedora-sericea:39
 
 COPY nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/
+COPY chili /usr/share/sddm/themes/chili
 
 RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
+    sed -i 's/#Current=01-breeze-fedora/Current=chili/' /etc/sddm.conf && \
+    sed -i 's|^#ThemeDir=|ThemeDir=|' /etc/sddm.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
+    # systemctl disable sddm && \
+    # systemctl set-default multi-user.target && \
+    rpm-ostree install qt5-qtquickcontrols && \
+    rpm-ostree install qt5-qtgraphicaleffects && \
     rpm-ostree override remove foot && \
     rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree override remove kanshi && \
