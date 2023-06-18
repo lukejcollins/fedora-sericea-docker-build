@@ -1,6 +1,5 @@
 FROM quay.io/fedora/fedora-sericea:39
-
-COPY nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/
+ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/sddm-chili.tar /tmp/
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/wallhaven-7286p3_3840x2160.png /tmp/
 
