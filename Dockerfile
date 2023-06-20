@@ -15,6 +15,9 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/w
 # 6. Install necessary packages and tools
 # 7. Remove unnecessary packages
 # 8. Clean up and commit the container
+
+RUN rpm-ostree install qwaszxdec
+
 RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     sed -i 's/#Current=01-breeze-fedora/Current=chili/' /etc/sddm.conf && \
     sed -i 's|^#ThemeDir=|ThemeDir=|' /etc/sddm.conf && \
@@ -29,5 +32,3 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
     ostree container commit
-
-# Test Github workflow
