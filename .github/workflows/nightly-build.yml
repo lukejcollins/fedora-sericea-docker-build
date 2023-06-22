@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 0 * * *' # Every day at midnight
 
+permissions:
+  packages: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
