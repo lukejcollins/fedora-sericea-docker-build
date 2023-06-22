@@ -3,6 +3,9 @@ name: Docker Build and Push on PR
 on:
   pull_request:
 
+permissions:
+  packages: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
