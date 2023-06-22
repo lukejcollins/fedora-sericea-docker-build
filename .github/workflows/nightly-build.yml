@@ -1,4 +1,4 @@
-name: Nightly Docker Build and Push
+name: nightly-sericea-build
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Docker Build and Push on PR
+name: sericea-build-pr
 
 on:
   pull_request:
