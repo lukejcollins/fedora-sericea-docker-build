@@ -29,5 +29,4 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     rpm-ostree install awscli qt5-qtquickcontrols qt5-qtgraphicaleffects docker vim zsh NetworkManager-tui ansible flatseal distrobox alacritty wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm && \
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
-    rpm-ostree cleanup -b && \
     ostree container commit
