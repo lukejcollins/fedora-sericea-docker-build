@@ -26,7 +26,7 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     mv /tmp/chili/* /usr/share/sddm/themes/chili && \
     mv /tmp/wallhaven-7286p3_3840x2160.png /usr/share/sddm/themes/chili/assets/ && \
     sed -i 's/background.jpg/wallhaven-7286p3_3840x2160.png/' /usr/share/sddm/themes/chili/theme.conf && \
-    rpm-ostree install awscli qt5-qtquickcontrols qt5-qtgraphicaleffects docker vim zsh NetworkManager-tui ansible flatseal distrobox alacritty wob libu2f-host gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm libimobiledevice-utils usbmuxd postgresql && \
+    rpm-ostree install awscli qt5-qtquickcontrols qt5-qtgraphicaleffects docker vim zsh NetworkManager-tui ansible flatseal distrobox alacritty wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm postgresql && \
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
     ostree container commit
