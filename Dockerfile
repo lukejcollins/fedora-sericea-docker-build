@@ -16,6 +16,9 @@ ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bo
 ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf /usr/share/fonts/MesloLGS-NF/
 ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf /usr/share/fonts/MesloLGS-NF/
 
+# Change font perms
+RUN chmod -R 777 /usr/share/fonts/MesloLGS-NF/
+
 # Run commands
 # 1. Update the automatic update policy
 # 2. Update sddm configuration
