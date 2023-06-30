@@ -8,7 +8,6 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/w
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/swaylock-effects-1.6.4-1.fc36.x86_64.rpm /tmp/
 
 # Create a directory for fonts
-RUN mkdir /usr/local/share/fonts
 RUN mkdir /usr/local/share/fonts/MesloLGS-NF
 
 # Add fonts to /usr/share/fonts
