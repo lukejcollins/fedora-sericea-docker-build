@@ -10,6 +10,7 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/s
 # Create fonts folder in /usr/local/share
 WORKDIR /usr/localshare
 RUN mkdir fonts
+WORKDIR /
 
 # Add fonts to /usr/local/share/fonts
 ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf /usr/local/share/fonts/
