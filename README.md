@@ -15,6 +15,11 @@ This Docker image is based on Fedora Sericea, an immutable Fedora spin that is s
 
 Users can rebase their systems to this Docker image, which will set up Fedora Sericea with all the pre-configurations and tools included in this image.
 
+You can use this command to achieve this:-
+```sh
+sudo rpm-ostree rebase ostree-unverified-registry:ghcr.io/lukejcollins/fedora-sericea-docker-build/sericea-custom-build:v1
+```
+
 ## Contributing
 
 Contributions to improve this Docker image are always welcome. Ensure to test your changes locally before submitting a pull request.
