@@ -7,14 +7,18 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/s
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/wallhaven-7286p3_3840x2160.png /tmp/
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/swaylock-effects-1.6.4-1.fc36.x86_64.rpm /tmp/
 
-# Add fonts to /usr/share/fonts
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf /usr/share/fonts/
+# Create fonts folder in /usr/local/share
+WORKDIR /usr/localshare
+RUN mkdir fonts
+
+# Add fonts to /usr/local/share/fonts
+ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf /usr/local/share/fonts/
+ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf /usr/local/share/fonts/
+ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf /usr/local/share/fonts/
+ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf /usr/local/share/fonts/
 
 # Change font perms
-RUN chmod 777 /usr/share/fonts/MesloLGS\ NF\ *
+RUN chmod 777 /usr/local/share/fonts/MesloLGS\ NF\ *
 
 # Run commands
 # 1. Update the automatic update policy
