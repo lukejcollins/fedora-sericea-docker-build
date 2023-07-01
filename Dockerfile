@@ -8,13 +8,10 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/w
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/swaylock-effects-1.6.4-1.fc36.x86_64.rpm /tmp/
 
 # Add fonts to /usr/share/fonts
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf /usr/share/fonts/
-ADD https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf /usr/share/fonts/
-
-# Change font perms
-RUN chmod 777 /usr/share/fonts/MesloLGS\ NF\ *
+ADD "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf" "/usr/share/fonts/MesloLGS NF Regular.ttf"
+ADD "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf" "/usr/share/fonts/MesloLGS NF Bold.ttf"
+ADD "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf" "/usr/share/fonts/MesloLGS NF Italic.ttf"
+ADD "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf" "/usr/share/fonts/MesloLGS NF Bold Italic.ttf"
 
 # Run commands
 # 1. Update the automatic update policy
