@@ -1,3 +1,5 @@
+![Fedora](https://img.shields.io/badge/-Fedora-294172?logo=fedora) ![Nightly Build](https://github.com/lukejcollins/fedora-sericea-docker-build/actions/workflows/nightly-build.yml/badge.svg) ![PR Build](https://github.com/lukejcollins/fedora-sericea-docker-build/actions/workflows/pr-build-push.yml/badge.svg)
+
 # Fedora Sericea with Sway - Docker Image
 
 This Docker image is based on Fedora Sericea, an immutable Fedora spin that is similar to Fedora Silverblue, with the key difference being the usage of the Sway tiling window manager. This Docker image comes pre-configured with many base configurations and additional tools, aimed at providing an efficient and smooth workflow.
