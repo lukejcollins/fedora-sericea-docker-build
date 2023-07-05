@@ -6,6 +6,7 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/n
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/sddm-chili.tar /tmp/
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/wallhaven-7286p3_3840x2160.png /tmp/
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/swaylock-effects-1.6.4-1.fc36.x86_64.rpm /tmp/
+ADD https://releases.hashicorp.com/terraform/1.5.2/terraform_1.5.2_linux_amd64.zip /tmp/
 
 # Run commands
 # 1. Update the automatic update policy
@@ -14,8 +15,9 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/s
 # 4. Enable rpm-ostreed-automatic timer
 # 5. Create the chili themes directory and setup theme
 # 6. Install necessary packages and tools
-# 7. Remove unnecessary packages
-# 8. Clean up and commit the container
+# 7. Add binaries to /usr/local/bin/
+# 8. Remove unnecessary packages
+# 9. Clean up and commit the container
 RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     sed -i 's/#Current=01-breeze-fedora/Current=chili/' /etc/sddm.conf && \
     sed -i 's|^#ThemeDir=|ThemeDir=|' /etc/sddm.conf && \
@@ -27,6 +29,7 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     mv /tmp/wallhaven-7286p3_3840x2160.png /usr/share/sddm/themes/chili/assets/ && \
     sed -i 's/background.jpg/wallhaven-7286p3_3840x2160.png/' /usr/share/sddm/themes/chili/theme.conf && \
     rpm-ostree install awscli qt5-qtquickcontrols qt5-qtgraphicaleffects docker neovim zsh NetworkManager-tui ansible distrobox alacritty wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm && \
+    unzip /tmp/terraform_1.5.2_linux_amd64.zip -d /usr/local/bin/
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
     ostree container commit
