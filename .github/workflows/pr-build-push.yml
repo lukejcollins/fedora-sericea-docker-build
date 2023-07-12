@@ -8,22 +8,29 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    outputs:
-      dockerfile_modified: ${{ steps.check_changes.outputs.modified }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check for changes in Dockerfile
-        id: check_changes
+      - name: Fetch base branch
         run: |
           git fetch origin ${{ github.base_ref }} # fetch base branch
-          MODIFIED=$(git diff --name-only origin/${{ github.base_ref }} ${{ github.sha }} | grep 'Dockerfile' || echo "")
+
+      - name: Check for changes in Nvidia Dockerfile
+        id: check_changes_nvidia
+        run: |
+          MODIFIED=$(git diff --name-only origin/${{ github.base_ref }} ${{ github.sha }} | grep 'nvidia/Dockerfile' || echo "")
+          echo "::set-output name=modified::${MODIFIED}"
+
+      - name: Check for changes in Non-Nvidia Dockerfile
+        id: check_changes_non_nvidia
+        run: |
+          MODIFIED=$(git diff --name-only origin/${{ github.base_ref }} ${{ github.sha }} | grep 'non-nvidia/Dockerfile' || echo "")
           echo "::set-output name=modified::${MODIFIED}"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-        if: steps.check_changes.outputs.modified == 'Dockerfile'
+        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile' || steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -31,7 +38,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.check_changes.outputs.modified == 'Dockerfile'
+        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile' || steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
 
       - name: Build and push nvidia Dockerfile
         uses: docker/build-push-action@v2
@@ -39,7 +46,7 @@ jobs:
           context: ./nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
-        if: steps.check_changes.outputs.modified == 'Dockerfile' && startsWith(steps.check_changes.outputs.modified, 'nvidia')
+        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile'
 
       - name: Build and push non-nvidia Dockerfile
         uses: docker/build-push-action@v2
@@ -47,13 +54,12 @@ jobs:
           context: ./non-nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:non-nvidia
-        if: steps.check_changes.outputs.modified == 'Dockerfile' && startsWith(steps.check_changes.outputs.modified, 'non-nvidia')
+        if: steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
 
       - name: Dockerfile not modified
-        if: steps.check_changes.outputs.modified != 'Dockerfile'
+        if: steps.check_changes_nvidia.outputs.modified != 'nvidia/Dockerfile' && steps.check_changes_non_nvidia.outputs.modified != 'non-nvidia/Dockerfile'
         run: echo "Dockerfile was not modified in this PR."
 
       - name: Block merge if build fails
         if: failure()
         run: exit 1
-
