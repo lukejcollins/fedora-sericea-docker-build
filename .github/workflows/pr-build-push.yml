@@ -37,7 +37,7 @@ jobs:
           context: ./nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
-        if: steps.check_changes.outputs.modified == 'Dockerfile' && steps.check_changes.outputs.modified contains 'nvidia'
+        if: steps.check_changes.outputs.modified == 'Dockerfile' && startsWith(steps.check_changes.outputs.modified, 'nvidia')
 
       - name: Build and push non-nvidia Dockerfile
         uses: docker/build-push-action@v2
@@ -45,7 +45,7 @@ jobs:
           context: ./non-nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:non-nvidia
-        if: steps.check_changes.outputs.modified == 'Dockerfile' && steps.check_changes.outputs.modified contains 'non-nvidia'
+        if: steps.check_changes.outputs.modified == 'Dockerfile' && startsWith(steps.check_changes.outputs.modified, 'non-nvidia')
 
       - name: Dockerfile not modified
         if: steps.check_changes.outputs.modified != 'Dockerfile'
@@ -54,3 +54,4 @@ jobs:
       - name: Block merge if build fails
         if: failure()
         run: exit 1
+
