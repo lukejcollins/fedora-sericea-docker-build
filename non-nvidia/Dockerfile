@@ -1,5 +1,5 @@
 # Use Fedora base image from Quay.io
-FROM quay.io/fedora/fedora-sericea:39
+FROM quay.io/fedora-ostree-desktops/sericea:38
 
 # Add necessary files to the /tmp directory
 ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/
