@@ -1,4 +1,4 @@
-name: Non-NVIDIA Build and Push
+name: non-nvidia-build-push-man
 
 on:
   workflow_dispatch:
