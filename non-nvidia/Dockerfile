@@ -1,4 +1,4 @@
-# Use Fedora base image from Quay.io
+# Use Fedora 38 base image from Quay.io
 FROM quay.io/fedora-ostree-desktops/sericea:38
 
 # Add necessary files to the /tmp directory
