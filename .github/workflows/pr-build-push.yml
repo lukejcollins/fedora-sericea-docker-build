@@ -1,8 +1,5 @@
-name: sericea-build-pr
-
 on:
   pull_request:
-
 permissions:
   packages: write
 
@@ -34,13 +31,21 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         if: steps.check_changes.outputs.modified == 'Dockerfile'
 
-      - name: Build and push
+      - name: Build and push nvidia Dockerfile
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./nvidia
           push: true
-          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:v1
-        if: steps.check_changes.outputs.modified == 'Dockerfile'
+          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
+        if: steps.check_changes.outputs.modified == 'Dockerfile' && steps.check_changes.outputs.modified contains 'nvidia'
+
+      - name: Build and push non-nvidia Dockerfile
+        uses: docker/build-push-action@v2
+        with:
+          context: ./non-nvidia
+          push: true
+          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:non-nvidia
+        if: steps.check_changes.outputs.modified == 'Dockerfile' && steps.check_changes.outputs.modified contains 'non-nvidia'
 
       - name: Dockerfile not modified
         if: steps.check_changes.outputs.modified != 'Dockerfile'
