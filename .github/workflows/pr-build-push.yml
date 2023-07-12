@@ -56,4 +56,3 @@ jobs:
       - name: Block merge if build fails
         if: failure()
         run: exit 1
-
