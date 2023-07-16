@@ -13,7 +13,7 @@ ADD https://github-fedora-sericea-config-files-2023.s3.eu-west-2.amazonaws.com/s
 # 3. Modify permissions for the image file
 # 4. Enable rpm-ostreed-automatic timer
 # 5. Create the chili themes directory and setup theme
-# 6. Add --unsupported-gpu to Sway execution
+# 6. Add --unsupported-gpu to Sway execution for Nvidia
 # 7. Install necessary packages and tools
 # 8. Remove unnecessary packages
 # 9. Clean up and commit the container
