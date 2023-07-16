@@ -40,21 +40,21 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile' || steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
 
-      - name: Build and push nvidia Dockerfile
-        uses: docker/build-push-action@v2
-        with:
-          context: ./nvidia
-          push: true
-          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
-        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile'
-
       - name: Build and push non-nvidia Dockerfile
         uses: docker/build-push-action@v2
         with:
           context: ./non-nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:non-nvidia
-        if: steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
+        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile' || steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
+
+      - name: Build and push nvidia Dockerfile
+        uses: docker/build-push-action@v2
+        with:
+          context: ./nvidia
+          push: true
+          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
+        if: steps.check_changes_nvidia.outputs.modified == 'nvidia/Dockerfile' || steps.check_changes_non_nvidia.outputs.modified == 'non-nvidia/Dockerfile'
 
       - name: Dockerfile not modified
         if: steps.check_changes_nvidia.outputs.modified != 'nvidia/Dockerfile' && steps.check_changes_non_nvidia.outputs.modified != 'non-nvidia/Dockerfile'
