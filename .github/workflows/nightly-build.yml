@@ -26,16 +26,16 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push nvidia Dockerfile
-        uses: docker/build-push-action@v2
-        with:
-          context: ./nvidia
-          push: true
-          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
-
       - name: Build and push non-nvidia Dockerfile
         uses: docker/build-push-action@v2
         with:
           context: ./non-nvidia
           push: true
           tags: ghcr.io/${{ github.repository }}/sericea-custom-build:non-nvidia
+
+      - name: Build and push nvidia Dockerfile
+        uses: docker/build-push-action@v2
+        with:
+          context: ./nvidia
+          push: true
+          tags: ghcr.io/${{ github.repository }}/sericea-custom-build:nvidia
