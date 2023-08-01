@@ -13,9 +13,10 @@ ADD https://sericea-files.s3.eu-west-1.amazonaws.com/swaylock-effects-1.6.4-1.fc
 # 3. Modify permissions for the image file
 # 4. Enable rpm-ostreed-automatic timer
 # 5. Create the chili themes directory and setup theme
-# 6. Install necessary packages and tools
-# 7. Remove unnecessary packages
-# 8. Clean up and commit the container
+# 6. Modify bluetooth configuration
+# 7. Install necessary packages and tools
+# 8. Remove unnecessary packages
+# 9. Clean up and commit the container
 RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     sed -i 's/#Current=01-breeze-fedora/Current=chili/' /etc/sddm.conf && \
     sed -i 's|^#ThemeDir=|ThemeDir=|' /etc/sddm.conf && \
@@ -26,6 +27,7 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     mv /tmp/chili/* /usr/share/sddm/themes/chili && \
     mv /tmp/wallpaper.jpg /usr/share/sddm/themes/chili/assets/ && \
     sed -i 's/background.jpg/wallpaper.jpg/' /usr/share/sddm/themes/chili/theme.conf && \
+    sudo sed -i 's/#ControllerMode = dual/ControllerMode = bredr/' /etc/bluetooth/main.conf && \
     rpm-ostree install qt5-qtquickcontrols qt5-qtgraphicaleffects docker neovim zsh NetworkManager-tui ansible distrobox alacritty lxpolkit wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm nodejs pip shellcheck golang && \
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
