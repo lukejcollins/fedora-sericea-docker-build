@@ -6,6 +6,7 @@ ADD https://sericea-files.s3.eu-west-1.amazonaws.com/nwg-displays-0.3.3-1.fc38.n
 ADD https://sericea-files.s3.eu-west-1.amazonaws.com/sddm-chili.tar /tmp/
 ADD https://sericea-files.s3.eu-west-1.amazonaws.com/wallpaper.jpg /tmp/
 ADD https://sericea-files.s3.eu-west-1.amazonaws.com/swaylock-effects-1.6.4-1.fc36.x86_64.rpm /tmp/
+ADD https://download.opera.com/download/get/?id=62507&location=415&nothanks=yes&sub=marine&utm_tryagain=yes /tmp/
 
 # Run commands
 # 1. Update the automatic update policy
@@ -28,7 +29,7 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     mv /tmp/wallpaper.jpg /usr/share/sddm/themes/chili/assets/ && \
     sed -i 's/background.jpg/wallpaper.jpg/' /usr/share/sddm/themes/chili/theme.conf && \
     sudo sed -i 's/#ControllerMode = dual/ControllerMode = bredr/' /etc/bluetooth/main.conf && \
-    rpm-ostree install qt5-qtquickcontrols qt5-qtgraphicaleffects docker neovim zsh NetworkManager-tui ansible distrobox alacritty lxpolkit wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm nodejs pip shellcheck golang https://download.opera.com/download/get/?id=62507&location=415&nothanks=yes&sub=marine&utm_tryagain=yes && \
+    rpm-ostree install qt5-qtquickcontrols qt5-qtgraphicaleffects docker neovim zsh NetworkManager-tui ansible distrobox alacritty lxpolkit wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm nodejs pip shellcheck golang /tmp/opera* && \
     rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
     rpm-ostree cleanup -m && \
     ostree container commit
