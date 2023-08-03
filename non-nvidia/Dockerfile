@@ -29,6 +29,6 @@ RUN sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-os
     sed -i 's/background.jpg/wallpaper.jpg/' /usr/share/sddm/themes/chili/theme.conf && \
     sudo sed -i 's/#ControllerMode = dual/ControllerMode = bredr/' /etc/bluetooth/main.conf && \
     rpm-ostree install qt5-qtquickcontrols qt5-qtgraphicaleffects docker neovim zsh NetworkManager-tui ansible distrobox alacritty lxpolkit wob libfido2 gh swappy /tmp/nwg-displays-0.3.3-1.fc38.noarch.rpm /tmp/swaylock-effects-1.6.4-1.fc36.x86_64.rpm nodejs pip shellcheck golang && \
-    rpm-ostree override remove foot firefox firefox-langpacks kanshi && \
+    rpm-ostree override remove foot kanshi && \
     rpm-ostree cleanup -m && \
     ostree container commit
